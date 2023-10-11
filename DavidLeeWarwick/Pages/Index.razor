@@ -1,0 +1,64 @@
+﻿@page "/"
+<p class="info"><span>@PollingInfo</span></p>
+@if (polled == DateTime.MinValue)
+{
+    <p class="loading">Loading</p>
+}
+else
+{
+    <h1>@raceseries</h1>
+    <h2>@racename</h2>
+    <h3>@racetrack</h3>
+
+    <table>
+        <tr>
+            <td>@RaceStarttime</td>
+            <td>@racestate</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>Duration</td>
+            <td>@Duration(duration)</td>
+        </tr>
+        <tr>
+            <td>Remaining</td>
+            <td>@Duration(timeremaining)</td>
+        </tr>
+    </table>
+
+    @foreach(Driver driver in drivers)
+    {
+        <table>
+            <tr class="driverName">
+                <td colspan="4">@driver.Name</td>
+            </tr>
+            <tr class="teamName">
+                <td colspan="4">@driver.TeamName</td>
+            </tr>
+            <tr>
+                <td>Fastest lap</td>
+                <td colspan="3">@driver.FastestLap</td>
+            </tr>
+            <tr>
+                <td>Last lap</td>
+                <td colspan="3">@driver.FastestLap</td>
+            </tr>
+            <tr>
+                <td></td>
+                @foreach(string text in driver.Sectors)
+                {
+                    <td>@text</td>
+                }
+            </tr>
+            <tr>
+                <td>Position</td>
+                <td colspan="3">@driver.Position</td>
+            </tr>
+            <tr>
+                <td>Laps</td>
+                <td colspan="3">@driver.Laps</td>
+            </tr>
+        </table>
+    }
+}

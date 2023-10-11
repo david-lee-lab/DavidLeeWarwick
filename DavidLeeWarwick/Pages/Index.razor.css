@@ -1,0 +1,24 @@
+﻿table {
+    margin: 16px 0;
+}
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.driverName td {
+    background-color: antiquewhite;
+}
+.teamName td {
+    background-color: azure;
+}
+.error {
+    padding: 8px;
+    background-color: red;
+    color: white;
+}
+.info span {
+    padding: 8px;
+    background-color: dodgerblue;
+    color: white;
+    max-width: 800px;
+}
