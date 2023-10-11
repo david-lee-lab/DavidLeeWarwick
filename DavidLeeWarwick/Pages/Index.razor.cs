@@ -24,6 +24,11 @@ public partial class Index
     //Timer
     System.Timers.Timer timer;
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (timer != null)
+            timer.Start();
+    }
     string PollingInfo
     {
         get
@@ -38,7 +43,6 @@ public partial class Index
     {
         await ReadData();
         await InvokeAsync(StateHasChanged);
-        timer.Start();
     }
     async Task ReadData()
     {
