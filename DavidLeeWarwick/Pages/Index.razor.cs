@@ -8,7 +8,8 @@ namespace DavidLeeWarwick.Pages;
 
 public partial class Index
 {
-    //Http
+    //Httptimer
+
     static HttpClient httpClient = new HttpClient();
 
     //Race data
@@ -146,11 +147,12 @@ public partial class Index
         }
 
         //Timer
-        timer = new System.Timers.Timer();
+        System.Timers.Timer timer = new();
+        timer.AutoReset = false;
         timer.Interval = 1500;
         timer.Elapsed += Timer_Elapsed;
-        timer.AutoReset = false;
         timer.Start();
+        this.timer = timer;//WARNING: important to have local variable first to ensure AutoReset is off because of other code which sets Start
     }
 }
 class Driver
