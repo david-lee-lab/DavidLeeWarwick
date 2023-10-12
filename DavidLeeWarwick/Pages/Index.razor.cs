@@ -14,7 +14,7 @@ public partial class Index
 
     //Race data
     string raceseries, racename, racetrack, racestate;
-    DateTime starttime;
+    DateTime? starttime;
     TimeSpan duration, timeremaining;
     List<Driver> drivers;
 
@@ -38,7 +38,7 @@ public partial class Index
             return $"Polled at {attempted:HH:mm:ss:fff}";
         }
     }
-    string RaceStarttime => starttime.ToString("d MMM yyyy HH:mm");
+    string RaceStarttime => starttime?.ToString("d MMM yyyy HH:mm");
     string Duration(TimeSpan span) => span.ToString();
     private async void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
     {
@@ -93,7 +93,10 @@ public partial class Index
         racename = root.GetProperty("name").GetString();
         racetrack = root.GetProperty("track").GetString();
         racestate = root.GetProperty("state").GetString();
-        starttime = root.GetProperty("startTime").GetDateTime();
+        
+        element = root.GetProperty("startTime");
+        starttime = element.ValueKind == JsonValueKind.String ? element.GetDateTime() : null;
+        
         duration = GetDuration(root, "duration");
         timeremaining = GetDuration(root, "timeRemaining");
         foreach (JsonElement classificationElement in root.GetProperty("classification").EnumerateArray())
